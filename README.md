@@ -1,8 +1,3 @@
-Preciso desarrollar una aplicación que me permita manejar el SIRCIP Sistema Informático de Recaudación, Control e Información de Percepciones, que es un sistema por la Comisión Arbitral (COMARB) para unificar, centralizar y estandarizar el régimen de percepciones de Ingresos Brutos bajo Convenio Multilateral.
-Para ello se precisa una funcionalidad para importar un padrón por contribuyente de publicación mensual en un archivo .TXT con un registro por CUIT que se descarga del Portal Federal Tributario. El archivo tiene un determinado formato.
-Además se precisa un calculador de la percepción de ingresos brutos según SIRCIP, de tal forma que se indique un CUIT, un importe y una provincia de entrega y el sistema calcule la lista de percepciones separadas por tipo para la operación.
-
-
 # PRD-001: SIRCIP — Gestionador del nuevo regimen SIRCIP de percepciones de Ingresos Brutos bajo Convenio Multilateral
 
 ## Contexto y Problema
@@ -17,7 +12,7 @@ Administrador del padrón: Es la persona encargada de descargar el padrón del P
 Usuario facturador: Es la persona que está facturando a un cliente y que tiene que calcular los importes de percepciones de ingresos brutos para dicho cliente.
 
 ## Objetivos
-<Qué significa ganar, a nivel producto.>
+Calcular de forma correcta las percepciones de ingresos brutos a un cliente en convenio multilateral, según la provincia de entrega del comprobante a facturar y hacerlo de forma rápida.
 
 ## Requerimientos Funcionales
 - RF-01: El sistema debe <una acción, verbo imperativo>.
