@@ -8,7 +8,7 @@ El archivo tiene un formato .TXT y una estructura informada en un documento de d
 También hay documentos que explican en función del contenido del padrón como se calculan dichos importes de percepciones.
 
 Personas:
-Administrador del padrón: Es la persona encargada de descargar el padrón del Portal Federal Tributario cuando está disponbile e importarlo en el nuevo sistema.
+Administrador del padrón: Es la persona encargada de descargar el padrón del Portal Federal Tributario cuando está disponbile e importarlo en el nuevo sistema. También puede solicitar el cálculo de percepciones de ingresos brutos.
 Usuario facturador: Es la persona que está facturando a un cliente y que tiene que calcular los importes de percepciones de ingresos brutos para dicho cliente.
 
 ## Objetivos
@@ -21,7 +21,8 @@ Calcular de forma correcta las percepciones de ingresos brutos a un cliente en c
 - RF-04: Para CUIT que no estén en el padrón del período indicado, el sistema no tiene que calcular percepciones de ingresos brutos.
 - RF-05: Si el período indicado para el cálculo de las percepciones no está importado en el sistema la API debe devolver un error de padrón inexistente para el cálculo.
 - RF-05: Si la importación del padrón genera algún error debe quedar registro del error, del usuario importador, el período y la fecha de importación.
-- RF-06: El padrón importado de un período, debe poder eliminarse.
+- RF-06: El padrón importado de un período, debe poder eliminarse. No desaparece del historia de importaciones, pero se marca como borrado.
+- RF-07: El sistema debe tener una página que permita consultar las importaciones realizadas existosas y con errores.
 
 ## Requerimientos No Funcionales
 - RNF-01: La importación del padrón debe realizarse en tiempos menores al minuto.
@@ -30,12 +31,17 @@ Calcular de forma correcta las percepciones de ingresos brutos a un cliente en c
 - RNF-04: El cálculo de las percepciones no puede demorar más de 30 segundos.
 
 ## Criterios de Aceptación
-- AC-01 (RF-01): Dado <contexto>, cuando <acción>, entonces <resultado medible>.
+- AC-01 (RF-01): Dado un usuario no autenticado, cuando intenta importar un padrón o pedir el cálculo de los impuestos, entonces el sistema responde HTTP 401.
+- AC-02 (RF-02): Dado un usuario con role usuario, si intenta importar un archivo de padr{on, entonces el sistema responde HTTP 403.
+- AC-03 (RF-03): Dado un usuario con role administrador o usuario, si intenta calcular percepciones para un período no importado, el sistema responde HTTP 404.
+- AC-04 (RF-03): Dado un usuario autenticado, si intenta calcular percepciones sin indicar el CUIT, fecha, importe mayor a cero y código de provincia de entrega, el sistema responde HTTP 400.
+- AC-05 (RF-04): Dado un usuario autenticado, si intenta calcular percepciones para un CUIT que no existe en el padrón del período, el sistema responde una lista vacia de percepciones de ingresos brutos.
+- AC-06 (RF-06): Dado un usuario autenticado como administrador, si borra el padrón de un periodo y luego consulta un CUIT de dicho padrón para ese período, el sistema responde http 404. Si consulta el historial debe verlo como borrado.
 
 ## Fuera de Alcance
-- No hay una página de registración de usuarios.
+- No hay una página de registración de usuarios. Los usuarios se dan de alta manualmente en una base de datos.
 - No puede realizarse varias veces la importación de un padrón de un período, dicho de otra forma no hay importación parcial o modificación de un padrón importado. Para volver a importarlo primero hay que eliminarlo y luego volver a importarlo.
 
 ## Riesgos y Dependencias
 - Riesgo: No se detecta.
-- Dependencia: SQLLite para almacenar los usuarios.
+- Dependencia: SQLLite para almacenar los usuarios. Usuarios ingresados en dicha base.
