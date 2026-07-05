@@ -15,8 +15,11 @@ Usuario facturador: Es la persona que está facturando a un cliente y que tiene 
 Calcular de forma correcta las percepciones de ingresos brutos a un cliente en convenio multilateral, según la provincia de entrega del comprobante a facturar y hacerlo de forma rápida.
 
 ## Requerimientos Funcionales
-- RF-01: El sistema debe <una acción, verbo imperativo>.
-- RF-02: ...
+- RF-01: Un usuario debe poder loguearse en el sistema con nombre de usuario y contraseña y el sistema tiene que poder administrar dos tipos de usuario Administradores y simples usuarios, sin RBAC configurable. 
+- RF-02: El sistema debe permitir que un usuario con role de Administrador pueda importar el padrón, que será un archivo con formato .txt desde una ubicación en el disco de la computadora. Debe poder indicarse el mes y año para el cual se está importando dicho padrón y debe quedar registro de la fecha de importación, el período, el usuario y cantidad de registros importados.
+- RF-03: El sistema debe poder a partir de una serie de reglas indicadas y la información del padrón, obtener a partir de un CUIT, un importe facturado y una provincia de entrega calcular que importe de percepciones de ingresos brutos, de qué tipo y a qué provincias hay que facturar al cliente. Esto se implementará con una API que devolverá una lista de impuestos a facturar.
+- RF-04: Para CUIT que no estén en el padrón el sistema no tiene que calcular percepciones de ingresos brutos.
+- RF-05: Si la importación del padrón genera algún error debe quedar registro del error, del usuario importador, el período y la fecha de importación.
 
 ## Requerimientos No Funcionales
 - RNF-01: <cualidad con número: "< 3 s p95", "≥ 85%">.
