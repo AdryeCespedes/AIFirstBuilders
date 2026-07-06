@@ -20,9 +20,9 @@ Calcular de forma correcta las percepciones de ingresos brutos a un cliente en c
 - RF-03: El sistema debe poder a partir de una serie de reglas indicadas y la información del padrón, obtener a partir de un CUIT, una fecha, un importe facturado y una provincia de entrega calcular que importe de percepciones de ingresos brutos, de qué tipo y a qué provincias hay que facturar al cliente. Esto se implementará con una API que devolverá una lista de impuestos a facturar.
 - RF-04: Para CUIT que no estén en el padrón del período indicado, el sistema no tiene que calcular percepciones de ingresos brutos.
 - RF-05: Si el período indicado para el cálculo de las percepciones no está importado en el sistema la API debe devolver un error de padrón inexistente para el cálculo.
-- RF-05: Si la importación del padrón genera algún error debe quedar registro del error, del usuario importador, el período y la fecha de importación.
-- RF-06: El padrón importado de un período, debe poder eliminarse. No desaparece del historia de importaciones, pero se marca como borrado.
-- RF-07: El sistema debe tener una página que permita consultar las importaciones realizadas existosas y con errores.
+- RF-06: Si la importación del padrón genera algún error debe quedar registro del error, del usuario importador, el período y la fecha de importación.
+- RF-07: El padrón importado de un período, debe poder eliminarse. No desaparece del historia de importaciones, pero se marca como borrado.
+- RF-08: El sistema debe tener una página que permita consultar las importaciones realizadas existosas y con errores.
 
 ## Requerimientos No Funcionales
 - RNF-01: La importación del padrón debe realizarse en tiempos menores al minuto.
@@ -36,7 +36,7 @@ Calcular de forma correcta las percepciones de ingresos brutos a un cliente en c
 - AC-03 (RF-03): Dado un usuario con role administrador o usuario, si intenta calcular percepciones para un período no importado, el sistema responde HTTP 404.
 - AC-04 (RF-03): Dado un usuario autenticado, si intenta calcular percepciones sin indicar el CUIT, fecha, importe mayor a cero y código de provincia de entrega, el sistema responde HTTP 400.
 - AC-05 (RF-04): Dado un usuario autenticado, si intenta calcular percepciones para un CUIT que no existe en el padrón del período, el sistema responde una lista vacia de percepciones de ingresos brutos.
-- AC-06 (RF-06): Dado un usuario autenticado como administrador, si borra el padrón de un periodo y luego consulta un CUIT de dicho padrón para ese período, el sistema responde http 404. Si consulta el historial debe verlo como borrado.
+- AC-06 (RF-07): Dado un usuario autenticado como administrador, si borra el padrón de un periodo y luego consulta un CUIT de dicho padrón para ese período, el sistema responde http 404. Si consulta el historial debe verlo como borrado.
 
 ## Fuera de Alcance
 - No hay una página de registración de usuarios. Los usuarios se dan de alta manualmente en una base de datos.
